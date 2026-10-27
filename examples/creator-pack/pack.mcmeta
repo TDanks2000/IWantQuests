@@ -1,0 +1,13 @@
+{
+  "pack": {
+    "description": "IWantQuests creator examples for Minecraft 26.2",
+    "min_format": [
+      107,
+      1
+    ],
+    "max_format": [
+      107,
+      1
+    ]
+  }
+}

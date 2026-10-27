@@ -1,0 +1,147 @@
+{
+  "chapters": [
+    {
+      "id": "creator:cooperation",
+      "title": "Together We Thrive",
+      "subtitle": "Work as a team",
+      "theme": "iwantquests:default",
+      "icon": "minecraft:wheat",
+      "order": 10
+    }
+  ],
+  "quests": [
+    {
+      "id": "creator:harvest",
+      "chapter": "creator:cooperation",
+      "title": "A Shared Harvest",
+      "subtitle": "Team effort",
+      "description": "A creator-pack example. Contributions belong to your team; rewards are personal.",
+      "icon": "minecraft:wheat",
+      "x": 0,
+      "y": 0,
+      "prerequisites": [],
+      "objectives": [
+        {
+          "id": "wheat",
+          "type": "obtain",
+          "count": 20,
+          "description": "Collect 20 wheat together",
+          "target": "minecraft:wheat"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "target": "minecraft:bread",
+          "count": 16
+        },
+        {
+          "type": "xp",
+          "count": 100
+        }
+      ],
+      "optional": false,
+      "hidden": false,
+      "retroactive": false,
+      "repeatable": false
+    },
+    {
+      "id": "creator:supply",
+      "chapter": "creator:cooperation",
+      "title": "Stock the Camp",
+      "description": "A creator-pack example. Contributions belong to your team; rewards are personal.",
+      "icon": "minecraft:chest",
+      "x": 120,
+      "y": 0,
+      "prerequisites": [
+        "creator:harvest"
+      ],
+      "objectives": [
+        {
+          "id": "submit",
+          "type": "submit",
+          "count": 16,
+          "description": "Submit 16 cobblestone",
+          "target": "minecraft:cobblestone"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "target": "minecraft:torch",
+          "count": 16
+        }
+      ],
+      "optional": false,
+      "hidden": false,
+      "retroactive": false,
+      "repeatable": false
+    },
+    {
+      "id": "creator:explore",
+      "chapter": "creator:cooperation",
+      "title": "Explore and Prepare",
+      "subtitle": "§6Expedition§r",
+      "description": "A creator-pack example. Contributions belong to your team; rewards are personal.",
+      "shape": "goal",
+      "icon": "minecraft:compass",
+      "x": 240,
+      "y": 0,
+      "prerequisites": [
+        "creator:supply"
+      ],
+      "objectives": [
+        {
+          "id": "dimension",
+          "type": "dimension",
+          "count": 1,
+          "description": "Visit the Nether",
+          "target": "minecraft:the_nether"
+        },
+        {
+          "id": "region",
+          "type": "region",
+          "count": 1,
+          "description": "Visit the Overworld origin region",
+          "dimension": "minecraft:overworld",
+          "minX": -32,
+          "minY": -64,
+          "minZ": -32,
+          "maxX": 32,
+          "maxY": 320,
+          "maxZ": 32
+        },
+        {
+          "id": "kill",
+          "type": "kill",
+          "count": 2,
+          "description": "Defeat 2 zombies",
+          "target": "minecraft:zombie"
+        },
+        {
+          "id": "possess",
+          "type": "possess",
+          "count": 3,
+          "description": "Check possession of 3 iron ingots",
+          "target": "minecraft:iron_ingot"
+        },
+        {
+          "id": "manual",
+          "type": "manual",
+          "count": 1,
+          "description": "Agree on your next expedition"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp",
+          "count": 150
+        }
+      ],
+      "optional": false,
+      "hidden": false,
+      "retroactive": false,
+      "repeatable": false
+    }
+  ]
+}

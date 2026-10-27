@@ -1,0 +1,40 @@
+{
+  "parent": "iwantquests:default",
+  "colors": {
+    "background": "#B0101010",
+    "overlay": "#B0000000",
+    "panel": "#FF2B2B2B",
+    "header": "#FF1E1E1E",
+    "sidebar": "#F01E1E1E",
+    "sidebar_selected": "#FF3A3A3A",
+    "border": "#FF000000",
+    "heading": "#FFFFFFA0",
+    "accent": "#FFFFFFFF",
+    "tab_selected": "#FFFFFFFF",
+    "line_available": "#FFFFFFFF",
+    "line_outline": "#FF000000",
+    "line_complete": "#FF55FF55",
+    "line_locked": "#FF555555"
+  },
+  "layout": {
+    "header_height": 28,
+    "title_position": "top_left",
+    "actions_position": "top_right",
+    "controls_position": "bottom_right",
+    "node_size": 26,
+    "line_width": 2
+  },
+  "shapes": {
+    "task": { "geometry": "square" },
+    "goal": { "geometry": "octagon" },
+    "challenge": { "geometry": "octagon", "scale": 1.25 }
+  },
+  "options": {
+    "flat_nodes": false,
+    "flat_buttons": false,
+    "canvas_grid": false,
+    "arrowheads": true,
+    "line_outlines": true,
+    "node_titles": false
+  }
+}

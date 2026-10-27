@@ -1,0 +1,100 @@
+{
+  "colors": {
+    "text": "#FFFFFFFF",
+    "muted": "#FFAAB4C0",
+    "subtle": "#FF7A8594",
+    "heading": "#FF7FD6C2",
+    "complete": "#FF5BD18B",
+    "ready": "#FFFFB347",
+    "in_progress": "#FFE8D66B",
+    "locked": "#FFFF6B6B",
+    "background": "#D9111720",
+    "overlay": "#99080B10",
+    "panel": "#F21A212C",
+    "header": "#F2161C26",
+    "sidebar": "#E612171F",
+    "sidebar_selected": "#FF1D2633",
+    "border": "#FF2E3A4A",
+    "tab": "#00000000",
+    "tab_selected": "#FF4FD1B5",
+    "line_complete": "#FF5BD18B",
+    "line_available": "#FF8FA3B8",
+    "line_locked": "#FF39424F",
+    "line_outline": "#00000000",
+    "progress_fill": "#FF4FD18B",
+    "progress_back": "#FF0B0F14",
+    "selection": "#FFFFFFFF",
+    "accent": "#FF4FD1B5",
+    "card": "#FF202A37",
+    "node_face": "#FF1A222D",
+    "node_face_locked": "#FF12171E",
+    "button": "#FF2C3848",
+    "button_hover": "#FF3A4A5E",
+    "button_disabled": "#FF1D2531"
+  },
+  "sprites": {
+    "slot": "minecraft:container/slot",
+    "notification": "minecraft:icon/unseen_notification",
+    "button": "minecraft:widget/button",
+    "button_highlighted": "minecraft:widget/button_highlighted",
+    "button_disabled": "minecraft:widget/button_disabled",
+    "background": null,
+    "tooltip": null,
+    "panel": null,
+    "sidebar": null,
+    "header": null,
+    "tab": null,
+    "tab_selected": null,
+    "badge_complete": null,
+    "badge_locked": null
+  },
+  "shapes": {
+    "task": {
+      "geometry": "circle",
+      "complete": "minecraft:advancements/task_frame_obtained",
+      "incomplete": "minecraft:advancements/task_frame_unobtained"
+    },
+    "goal": {
+      "geometry": "rounded",
+      "complete": "minecraft:advancements/goal_frame_obtained",
+      "incomplete": "minecraft:advancements/goal_frame_unobtained"
+    },
+    "challenge": {
+      "geometry": "hexagon",
+      "complete": "minecraft:advancements/challenge_frame_obtained",
+      "incomplete": "minecraft:advancements/challenge_frame_unobtained"
+    }
+  },
+  "layout": {
+    "node_size": 30,
+    "node_border": 2,
+    "node_icon_scale": 0.56,
+    "details_width": 170,
+    "sidebar_position": "left",
+    "sidebar_width": 30,
+    "sidebar_expanded_width": 140,
+    "tab_height": 24,
+    "header_height": 0,
+    "title_position": "top_left",
+    "actions_position": "top_right",
+    "controls_position": "bottom_right",
+    "line_width": 2
+  },
+  "options": {
+    "font": null,
+    "blur": true,
+    "text_shadow": true,
+    "chapter_title": true,
+    "sidebar_progress": true,
+    "node_progress_bars": true,
+    "node_titles": false,
+    "animations": true,
+    "canvas_grid": true,
+    "direct_connections": true,
+    "arrowheads": false,
+    "line_outlines": false,
+    "flat_buttons": true,
+    "flat_nodes": true,
+    "locked_alpha": 0.6
+  }
+}

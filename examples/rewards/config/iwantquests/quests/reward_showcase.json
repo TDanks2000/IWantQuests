@@ -1,0 +1,80 @@
+{
+  "chapters": [
+    {
+      "id": "examples:rewards",
+      "title": "Reward Showcase",
+      "subtitle": "Choices, surprises and repeats",
+      "icon": "minecraft:chest",
+      "order": 90
+    }
+  ],
+  "quests": [
+    {
+      "id": "examples:pick_a_prize",
+      "chapter": "examples:rewards",
+      "title": "Pick a Prize",
+      "description": "Press the button in the quest window, then choose one of the rewards below. Each player makes their own choice.",
+      "icon": "minecraft:trapped_chest",
+      "x": 0,
+      "y": 0,
+      "prerequisites": [],
+      "objectives": [
+        { "id": "done", "type": "manual", "count": 1, "description": "Announce that you are ready" }
+      ],
+      "rewards": [
+        {
+          "type": "choice",
+          "name": "Choose your prize",
+          "options": [
+            { "type": "item", "target": "minecraft:bread", "count": 16 },
+            { "type": "item", "target": "minecraft:apple", "count": 4 },
+            { "type": "xp", "count": 200 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "examples:lucky_dip",
+      "chapter": "examples:rewards",
+      "title": "Lucky Dip",
+      "description": "The reward is rolled when you claim it. Weights set the odds: here 70, 25 and 5 out of 100.",
+      "icon": "minecraft:ender_chest",
+      "x": 64,
+      "y": 0,
+      "prerequisites": ["examples:pick_a_prize"],
+      "objectives": [
+        { "id": "mine", "type": "submit", "target": "minecraft:cobblestone", "count": 8, "description": "Hand in 8 cobblestone" }
+      ],
+      "rewards": [
+        {
+          "type": "random",
+          "count": 1,
+          "options": [
+            { "type": "item", "target": "minecraft:bread", "count": 4, "weight": 70 },
+            { "type": "item", "target": "minecraft:golden_apple", "count": 1, "weight": 25 },
+            { "type": "item", "target": "minecraft:diamond", "count": 2, "weight": 5 }
+          ]
+        },
+        { "type": "loot_table", "target": "minecraft:chests/spawn_bonus_chest", "count": 1, "name": "A bonus chest of supplies", "icon": "minecraft:chest" }
+      ]
+    },
+    {
+      "id": "examples:zombie_farm",
+      "chapter": "examples:rewards",
+      "title": "Zombie Farm",
+      "description": "Repeatable. Once every team member has claimed, the quest starts over. Repeatable quests may use craft, kill and submit tasks.",
+      "icon": "minecraft:rotten_flesh",
+      "x": 128,
+      "y": 0,
+      "prerequisites": [],
+      "objectives": [
+        { "id": "zombies", "type": "kill", "target": "minecraft:zombie", "count": 10, "description": "Defeat 10 zombies" }
+      ],
+      "rewards": [
+        { "type": "xp", "count": 50 },
+        { "type": "command", "target": "give {player} minecraft:emerald 2", "count": 1, "name": "2 Emeralds", "icon": "minecraft:emerald" }
+      ],
+      "repeatable": true
+    }
+  ]
+}

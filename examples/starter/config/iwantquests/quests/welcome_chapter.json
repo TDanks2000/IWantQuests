@@ -1,0 +1,140 @@
+{
+  "chapters": [
+    {
+      "id": "mypack:welcome",
+      "title": "Welcome to MyPack",
+      "subtitle": "Your first steps",
+      "icon": "minecraft:oak_sapling",
+      "order": 0
+    }
+  ],
+  "quests": [
+    {
+      "id": "mypack:read_guide",
+      "chapter": "mypack:welcome",
+      "title": "Read the Guide",
+      "subtitle": "Start here",
+      "description": "Welcome! Tick this off once you have read the pack's guide.",
+      "icon": "minecraft:writable_book",
+      "x": 0,
+      "y": 48,
+      "prerequisites": [],
+      "objectives": [
+        { "id": "read", "type": "manual", "count": 1, "description": "Read the welcome guide" }
+      ],
+      "rewards": [
+        { "type": "item", "target": "minecraft:bread", "count": 8 }
+      ]
+    },
+    {
+      "id": "mypack:wood",
+      "chapter": "mypack:welcome",
+      "title": "Timber!",
+      "description": "Punch some trees. Any kind of log counts.",
+      "icon": "minecraft:oak_log",
+      "x": 72,
+      "y": 48,
+      "prerequisites": ["mypack:read_guide"],
+      "objectives": [
+        { "id": "logs", "type": "obtain", "target": "#minecraft:logs", "count": 16, "description": "Collect 16 logs" }
+      ],
+      "rewards": [
+        { "type": "item", "target": "minecraft:torch", "count": 16 },
+        { "type": "xp", "count": 50 }
+      ]
+    },
+    {
+      "id": "mypack:tools",
+      "chapter": "mypack:welcome",
+      "title": "Proper Tools",
+      "description": "Craft an iron pickaxe. This branch and the hunting branch both lead to the Nether.",
+      "icon": "minecraft:iron_pickaxe",
+      "x": 144,
+      "y": 0,
+      "prerequisites": ["mypack:wood"],
+      "objectives": [
+        { "id": "pick", "type": "craft", "target": "minecraft:iron_pickaxe", "count": 1, "description": "Craft an iron pickaxe" }
+      ],
+      "rewards": [
+        { "type": "item", "target": "minecraft:iron_ingot", "count": 8 }
+      ]
+    },
+    {
+      "id": "mypack:hunt",
+      "chapter": "mypack:welcome",
+      "title": "Night Watch",
+      "description": "Zombies roam at night. Thin them out. Kills by any team member count.",
+      "icon": "minecraft:iron_sword",
+      "x": 144,
+      "y": 96,
+      "prerequisites": ["mypack:wood"],
+      "objectives": [
+        { "id": "zombies", "type": "kill", "target": "minecraft:zombie", "count": 10, "description": "Defeat 10 zombies" }
+      ],
+      "rewards": [
+        { "type": "item", "target": "minecraft:cooked_beef", "count": 12 }
+      ]
+    },
+    {
+      "id": "mypack:nether",
+      "chapter": "mypack:welcome",
+      "title": "Into the Fire",
+      "subtitle": "A real challenge",
+      "description": "Needs BOTH Proper Tools and Night Watch. Step through a portal into the Nether.",
+      "icon": "minecraft:flint_and_steel",
+      "shape": "challenge",
+      "x": 216,
+      "y": 48,
+      "prerequisites": ["mypack:tools", "mypack:hunt"],
+      "objectives": [
+        { "id": "visit", "type": "dimension", "target": "minecraft:the_nether", "count": 1, "description": "Enter the Nether" }
+      ],
+      "rewards": [
+        { "type": "item", "target": "minecraft:golden_apple", "count": 2 },
+        { "type": "xp", "count": 250 }
+      ]
+    },
+    {
+      "id": "mypack:supply",
+      "chapter": "mypack:welcome",
+      "title": "Pay the Toll",
+      "description": "Hand over 3 diamonds. Submitting takes the items from your inventory.",
+      "icon": "minecraft:diamond",
+      "shape": "goal",
+      "x": 288,
+      "y": 48,
+      "prerequisites": ["mypack:nether"],
+      "objectives": [
+        { "id": "toll", "type": "submit", "target": "minecraft:diamond", "count": 3, "description": "Submit 3 diamonds" }
+      ],
+      "rewards": [
+        { "type": "item", "target": "minecraft:emerald", "count": 16 }
+      ]
+    },
+    {
+      "id": "mypack:outpost",
+      "chapter": "mypack:welcome",
+      "title": "§6Scout the Spawn§r",
+      "description": "Optional. Walk into the marked area near the world origin. Optional quests do not count toward chapter progress.",
+      "icon": "minecraft:compass",
+      "x": 72,
+      "y": 112,
+      "optional": true,
+      "prerequisites": ["mypack:read_guide"],
+      "objectives": [
+        {
+          "id": "area",
+          "type": "region",
+          "count": 1,
+          "description": "Reach the spawn area",
+          "dimension": "minecraft:overworld",
+          "minX": -32, "minY": -64, "minZ": -32,
+          "maxX": 32, "maxY": 320, "maxZ": 32
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "count": 30 }
+      ]
+    }
+  ]
+}

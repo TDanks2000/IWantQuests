@@ -1,0 +1,20 @@
+{
+  "parent": "iwantquests:default",
+  "colors": {
+    "background": "#D9060E24",
+    "overlay": "#99040A1A",
+    "panel": "#F20C1730",
+    "header": "#F2091226",
+    "sidebar": "#E6081022",
+    "sidebar_selected": "#FF11203F",
+    "card": "#FF14223F",
+    "border": "#FF22365C",
+    "heading": "#FF6FE3FF",
+    "accent": "#FF4FB0FF",
+    "tab_selected": "#FF4FB0FF",
+    "node_face": "#FF0F1B33",
+    "node_face_locked": "#FF0A1223",
+    "button": "#FF1F3358",
+    "button_hover": "#FF2C4577"
+  }
+}

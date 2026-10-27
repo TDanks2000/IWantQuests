@@ -1,0 +1,114 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+    id 'idea'
+    id 'com.diffplug.spotless' version '8.10.4'
+}
+
+version = mod_version
+group = mod_group_id
+base { archivesName = mod_id }
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+repositories { mavenCentral() }
+
+neoForge {
+    version = project.neo_version
+    runs {
+        client {
+            client()
+            gameDirectory = project.file('runs/client')
+        }
+        server {
+            server()
+            gameDirectory = project.file('runs/server')
+            programArgument '--nogui'
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+            gameDirectory = project.file('runs/gametest')
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        smokeClient {
+            client()
+            gameDirectory = project.file('runs/smoke')
+            systemProperty 'iwantquests.smokeTest', 'true'
+        }
+        configureEach { logLevel = org.slf4j.event.Level.INFO }
+    }
+    mods {
+        "${mod_id}" { sourceSet(sourceSets.main) }
+    }
+}
+
+dependencies {
+    testImplementation 'com.google.code.gson:gson:2.14.0'
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+def generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
+    def properties = [
+        minecraft_version: minecraft_version,
+        minecraft_version_range: minecraft_version_range,
+        neo_version: neo_version,
+        mod_id: mod_id,
+        mod_name: mod_name,
+        mod_license: mod_license,
+        mod_version: mod_version
+    ]
+    inputs.properties properties
+    expand properties
+    from 'src/main/templates'
+    into 'build/generated/sources/modMetadata'
+}
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
+
+spotless {
+    java {
+        target 'src/**/*.java'
+        palantirJavaFormat('2.102.0')
+        removeUnusedImports()
+        endWithNewline()
+    }
+}
+
+tasks.named('test', Test) { useJUnitPlatform() }
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('wrapper', Wrapper) { distributionType = Wrapper.DistributionType.BIN }
+
+// The development smoke run starts from fresh private drafts, loads the reward showcase example, and
+// adds a generated catalogue larger than the old 900 KB limit to prove it reaches players in several parts.
+def smokeConfig = layout.projectDirectory.dir('runs/smoke/config')
+def cleanSmokeDrafts = tasks.register('cleanSmokeDrafts', Delete) { delete smokeConfig.dir('iwantquests/drafts') }
+def copySmokeExamples = tasks.register('copySmokeExamples', Copy) {
+    from 'examples/rewards/config/iwantquests/quests'
+    into smokeConfig.dir('iwantquests/quests')
+    doNotTrackState('The game run directory is changed by the game itself')
+}
+def generateSmokeBulk = tasks.register('generateSmokeBulk') {
+    def target = smokeConfig.file('iwantquests/quests/bulk.json')
+    outputs.file(target)
+    doLast {
+        def quests = (0..<2500).collect { i ->
+            [id: "bulk:q${i}".toString(), chapter: 'bulk:chapter', title: "Bulk quest ${i}".toString(),
+             description: 'Generated to prove that a large catalogue reaches players in several parts. ' * 2,
+             icon: 'minecraft:stone', x: (i % 50) * 48, y: ((int) (i / 50)) * 48, prerequisites: [],
+             objectives: [[id: 'main', type: 'kill', target: 'minecraft:zombie', count: 1, description: 'Defeat a zombie']],
+             rewards: [[type: 'xp', count: 1]]]
+        }
+        def pack = [chapters: [[id: 'bulk:chapter', title: 'Bulk', icon: 'minecraft:stone', order: 999]], quests: quests]
+        target.asFile.parentFile.mkdirs()
+        target.asFile.setText(groovy.json.JsonOutput.toJson(pack), 'UTF-8')
+    }
+}
+def prepareSmoke = tasks.register('prepareSmoke') { dependsOn cleanSmokeDrafts, copySmokeExamples, generateSmokeBulk }
+tasks.matching { it.name == 'runSmokeClient' }.configureEach { dependsOn prepareSmoke }
+
+// Development automation is unavailable in installed release artifacts.
+tasks.named('jar', Jar) {
+    exclude 'dev/iwantquests/testing/**'
+    exclude 'data/iwantquests/structure/empty.nbt'
+}
+idea.module.downloadSources = true

@@ -1,0 +1,507 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IWantQuests quest pack 1.0.0",
+  "type": "object",
+  "required": [
+    "chapters",
+    "quests"
+  ],
+  "properties": {
+    "chapters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/chapter"
+      }
+    },
+    "quests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/quest"
+      }
+    }
+  },
+  "$defs": {
+    "chapter": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "icon"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "icon": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256
+        },
+        "order": {
+          "type": "integer"
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Short text shown under the chapter title."
+        },
+        "theme": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256,
+          "description": "Client theme identifier, such as iwantquests:default. The theme itself is provided by a resource pack."
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256,
+          "description": "Texture identifier drawn behind the chapter tree, such as mypack:textures/gui/quests/mining.png."
+        },
+        "prerequisites": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "Quest IDs that must be complete before this chapter tab unlocks. Visual gating only.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+            "maxLength": 256
+          }
+        }
+      }
+    },
+    "quest": {
+      "type": "object",
+      "required": [
+        "id",
+        "chapter",
+        "title",
+        "prerequisites",
+        "objectives",
+        "rewards"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "icon"
+          ]
+        },
+        {
+          "required": [
+            "iconTexture"
+          ]
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256
+        },
+        "chapter": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "prerequisites": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+            "maxLength": 256
+          }
+        },
+        "objectives": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/objective"
+          }
+        },
+        "rewards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reward"
+          }
+        },
+        "optional": {
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "type": "boolean",
+          "default": false
+        },
+        "retroactive": {
+          "type": "boolean",
+          "default": false
+        },
+        "repeatable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Starts over once every team member has claimed. Only craft, kill and submit objectives are allowed; the quest cannot be retroactive or a prerequisite."
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Short text shown under the quest title. Supports Minecraft § formatting codes."
+        },
+        "shape": {
+          "description": "Node frame: task (default), goal, challenge, or a namespaced shape ID provided by a theme.",
+          "anyOf": [
+            {
+              "enum": [
+                "task",
+                "goal",
+                "challenge"
+              ]
+            },
+            {
+              "type": "string",
+              "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+              "maxLength": 256
+            }
+          ]
+        },
+        "size": {
+          "description": "Node scale from 0.5 to 3.0. 0 or absent means 1.0.",
+          "anyOf": [
+            {
+              "const": 0
+            },
+            {
+              "type": "number",
+              "minimum": 0.5,
+              "maximum": 3.0
+            }
+          ]
+        },
+        "iconTexture": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256,
+          "description": "GUI sprite identifier drawn instead of the item icon, such as mypack:star_icon."
+        }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "count"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "type": {
+          "enum": [
+            "obtain",
+            "possess",
+            "craft",
+            "kill",
+            "dimension",
+            "region",
+            "submit",
+            "manual"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "pattern": "^#?[a-z0-9_.-]+:[a-z0-9_./-]+$"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "description": {
+          "type": "string"
+        },
+        "dimension": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "maxLength": 256
+        },
+        "minX": {
+          "type": "number"
+        },
+        "minY": {
+          "type": "number"
+        },
+        "minZ": {
+          "type": "number"
+        },
+        "maxX": {
+          "type": "number"
+        },
+        "maxY": {
+          "type": "number"
+        },
+        "maxZ": {
+          "type": "number"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "obtain",
+                  "possess",
+                  "craft",
+                  "kill",
+                  "dimension",
+                  "submit"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "target"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "region"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "dimension",
+              "minX",
+              "minY",
+              "minZ",
+              "maxX",
+              "maxY",
+              "maxZ"
+            ]
+          }
+        }
+      ]
+    },
+    "reward": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "item",
+            "xp",
+            "command",
+            "loot_table",
+            "random",
+            "choice"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "maxLength": 512,
+          "description": "Item ID for item, loot table ID for loot_table, command for command."
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000,
+          "description": "Amount for item and xp (at least 1), times to run for command (1-100), rolls for loot_table (1-64), picks for random (1-16). Omit for choice."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Optional text shown in the book instead of the generated one."
+        },
+        "icon": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "description": "Optional item ID shown as the reward icon."
+        },
+        "weight": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 1,
+          "description": "Share of a random pick when this reward is an option of a random reward."
+        },
+        "options": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/rewardOption"
+          },
+          "description": "Rewards a random reward picks from or a choice reward offers. Required for random and choice."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "item",
+                  "command",
+                  "loot_table"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "target"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "item",
+                  "xp"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "count"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "random",
+                  "choice"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "options"
+            ]
+          }
+        }
+      ]
+    },
+    "rewardOption": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "item",
+            "xp",
+            "command",
+            "loot_table"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "maxLength": 512,
+          "description": "Item ID for item, loot table ID for loot_table, command for command."
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000,
+          "description": "Amount for item and xp (at least 1), times to run for command (1-100), rolls for loot_table (1-64), picks for random (1-16). Omit for choice."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Optional text shown in the book instead of the generated one."
+        },
+        "icon": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$",
+          "description": "Optional item ID shown as the reward icon."
+        },
+        "weight": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 1,
+          "description": "Share of a random pick when this reward is an option of a random reward."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "item",
+                  "command",
+                  "loot_table"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "target"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "item",
+                  "xp"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "count"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

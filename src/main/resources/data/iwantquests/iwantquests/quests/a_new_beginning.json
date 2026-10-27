@@ -1,0 +1,185 @@
+{
+  "chapters": [
+    {
+      "id": "iwantquests:a_new_beginning",
+      "title": "A New Beginning",
+      "subtitle": "Your first day",
+      "icon": "minecraft:oak_sapling",
+      "order": 0
+    }
+  ],
+  "quests": [
+    {
+      "id": "iwantquests:first_steps",
+      "chapter": "iwantquests:a_new_beginning",
+      "title": "First Steps",
+      "description": "Gather logs to begin your journey.",
+      "subtitle": "Wood for everything to come",
+      "icon": "minecraft:oak_log",
+      "x": 0,
+      "y": 0,
+      "prerequisites": [],
+      "objectives": [
+        {
+          "id": "main",
+          "type": "obtain",
+          "target": "#minecraft:logs",
+          "count": 16,
+          "description": "Obtain 16 logs"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "target": "minecraft:bread",
+          "count": 8
+        }
+      ],
+      "optional": false,
+      "hidden": false,
+      "retroactive": false,
+      "repeatable": false
+    },
+    {
+      "id": "iwantquests:getting_equipped",
+      "chapter": "iwantquests:a_new_beginning",
+      "title": "Getting Equipped",
+      "description": "Craft your first pickaxe.",
+      "subtitle": "Your first tool",
+      "icon": "minecraft:wooden_pickaxe",
+      "x": 76,
+      "y": 46,
+      "prerequisites": [
+        "iwantquests:first_steps"
+      ],
+      "objectives": [
+        {
+          "id": "main",
+          "type": "craft",
+          "target": "minecraft:wooden_pickaxe",
+          "count": 1,
+          "description": "Craft 1 wooden pickaxe"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "target": "minecraft:torch",
+          "count": 8
+        }
+      ],
+      "optional": false,
+      "hidden": false,
+      "retroactive": false,
+      "repeatable": false
+    },
+    {
+      "id": "iwantquests:stone_age",
+      "chapter": "iwantquests:a_new_beginning",
+      "title": "Stone Age",
+      "description": "Collect stone for a stronger foundation.",
+      "subtitle": "Hard stone, hard work",
+      "icon": "minecraft:cobblestone",
+      "x": 152,
+      "y": 0,
+      "prerequisites": [
+        "iwantquests:getting_equipped"
+      ],
+      "objectives": [
+        {
+          "id": "main",
+          "type": "obtain",
+          "target": "minecraft:cobblestone",
+          "count": 32,
+          "description": "Obtain 32 cobblestone"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "target": "minecraft:baked_potato",
+          "count": 16
+        }
+      ],
+      "optional": false,
+      "hidden": false,
+      "retroactive": false,
+      "repeatable": false
+    },
+    {
+      "id": "iwantquests:a_safe_place",
+      "chapter": "iwantquests:a_new_beginning",
+      "title": "A Safe Place",
+      "description": "Craft a bed in any colour.",
+      "subtitle": "Rest easy tonight",
+      "icon": "minecraft:red_bed",
+      "x": 228,
+      "y": 46,
+      "prerequisites": [
+        "iwantquests:stone_age"
+      ],
+      "objectives": [
+        {
+          "id": "main",
+          "type": "craft",
+          "target": "#minecraft:beds",
+          "count": 1,
+          "description": "Craft 1 beds"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "target": "minecraft:chest",
+          "count": 1
+        },
+        {
+          "type": "xp",
+          "count": 100
+        }
+      ],
+      "optional": false,
+      "hidden": false,
+      "retroactive": false,
+      "repeatable": false
+    },
+    {
+      "id": "iwantquests:ready_for_adventure",
+      "chapter": "iwantquests:a_new_beginning",
+      "title": "Ready for Adventure",
+      "description": "Obtain an iron pickaxe. Crafting or picking one up counts.",
+      "subtitle": "The road ahead opens",
+      "shape": "challenge",
+      "icon": "minecraft:iron_pickaxe",
+      "x": 304,
+      "y": 0,
+      "prerequisites": [
+        "iwantquests:a_safe_place"
+      ],
+      "objectives": [
+        {
+          "id": "main",
+          "type": "obtain",
+          "target": "minecraft:iron_pickaxe",
+          "count": 1,
+          "description": "Obtain 1 iron pickaxe"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "target": "minecraft:iron_ingot",
+          "count": 8
+        },
+        {
+          "type": "xp",
+          "count": 150
+        }
+      ],
+      "optional": false,
+      "hidden": false,
+      "retroactive": false,
+      "repeatable": false
+    }
+  ]
+}
