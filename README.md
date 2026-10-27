@@ -622,4 +622,4 @@ Testing so far covers Windows, with the integrated server and a dedicated server
 two independent human clients on one dedicated server, and very large modpacks have not been
 tested by the maintainers. If you hit a problem there, please report it with your logs.
 
-License: All Rights Reserved. Dependency licences are in [third-party notices](THIRD_PARTY_NOTICES.md).
+License: All Rights Reserved, see [LICENSE](LICENSE). Dependency licences are in [third-party notices](THIRD_PARTY_NOTICES.md).
